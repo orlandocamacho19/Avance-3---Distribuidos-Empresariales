@@ -4,11 +4,20 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 import java.util.UUID;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeoutException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import seguridad.Encriptacion;
 
 public class RPCClient implements AutoCloseable {
     
@@ -36,13 +45,31 @@ public class RPCClient implements AutoCloseable {
                     break;
                 }
                 
+                Encriptacion seguridad = new Encriptacion();
+                question = seguridad.encriptar(question, "com");
+                
+                System.out.println("\nEncriptando mensaje... -> " + question);
                 System.out.println("Mensaje enviado...\n");
                 
                 String response = client.call(question);
-                System.out.println("Respuesta: '" + response + "'\n");
+                System.out.println("Desencriptando mensaje... -> " + response);
+               
+                response = seguridad.desencriptar(response, "com");
+                 
+                System.out.println("Respuesta recibida: " + response + "\n");
             }
         } catch (IOException | TimeoutException | InterruptedException e) {
             e.printStackTrace();
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(RPCClient.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvalidKeyException ex) {
+            Logger.getLogger(RPCClient.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchPaddingException ex) {
+            Logger.getLogger(RPCClient.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalBlockSizeException ex) {
+            Logger.getLogger(RPCClient.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (BadPaddingException ex) {
+            Logger.getLogger(RPCClient.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

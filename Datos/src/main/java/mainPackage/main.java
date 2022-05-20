@@ -27,7 +27,7 @@ public class main {
         while (true) {
             rpc.solicitarDatos();
             datosDao.insertarDatos();
-            Thread.sleep(60*1000);
+            Thread.sleep(30*1000);
             datosR.getInstance().setJson(datos.getInstance().getJson());
             rpcReg.enviarDatos();
             

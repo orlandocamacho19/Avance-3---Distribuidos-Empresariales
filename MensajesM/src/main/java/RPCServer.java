@@ -1,5 +1,14 @@
 import com.rabbitmq.client.*;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import seguridad.Encriptacion;
 
 public class RPCServer {
 
@@ -18,7 +27,7 @@ public class RPCServer {
 
             channel.basicQos(1);
 
-            System.out.println("Esperando mensajes...");
+            System.out.println("Esperando mensajes...\n");
 
             Object monitor = new Object();
             DeliverCallback deliverCallback = (consumerTag, delivery) -> {
@@ -31,14 +40,34 @@ public class RPCServer {
 
                 try {
                     String message = new String(delivery.getBody(), "UTF-8");
-
+                    System.out.println("Desencriptando mensaje... -> " + message);
+                    
+                    Encriptacion seguridad = new Encriptacion();
+                    message = seguridad.desencriptar(message, "com");
+                    
                     System.out.println("Mensaje recibido: " + message +"\n");
                     System.out.println("Ingrese respuesta: ");
                     response = tec.nextLine();
+                    
+                    response = seguridad.encriptar(response, "com");
+                    
+                    System.out.println("\nEncriptando mensaje... -> " + response);
                     System.out.println("Mensaje enviado...\n");
                             
                 } catch (RuntimeException e) {
                     System.out.println(e.toString());
+                } catch (UnsupportedEncodingException ex) {
+                    Logger.getLogger(RPCServer.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (NoSuchAlgorithmException ex) {
+                    Logger.getLogger(RPCServer.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InvalidKeyException ex) {
+                    Logger.getLogger(RPCServer.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (NoSuchPaddingException ex) {
+                    Logger.getLogger(RPCServer.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalBlockSizeException ex) {
+                    Logger.getLogger(RPCServer.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (BadPaddingException ex) {
+                    Logger.getLogger(RPCServer.class.getName()).log(Level.SEVERE, null, ex);
                 } finally {
                     channel.basicPublish("", delivery.getProperties().getReplyTo(), replyProps, response.getBytes("UTF-8"));
                     channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);

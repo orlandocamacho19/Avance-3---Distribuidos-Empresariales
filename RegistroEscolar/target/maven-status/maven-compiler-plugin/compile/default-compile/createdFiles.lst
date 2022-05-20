@@ -1,0 +1,8 @@
+dominio/AlumnoRegistro.class
+mainPackage/main.class
+dominio/Alumno.class
+dominio/Maestro.class
+comunicacion/RpcRecibirDatosConexRegistro.class
+dominio/Asignacion.class
+mainPackage/datos.class
+dominio/Materia.class

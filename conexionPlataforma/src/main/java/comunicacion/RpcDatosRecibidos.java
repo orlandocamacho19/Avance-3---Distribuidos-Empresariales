@@ -5,11 +5,20 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeoutException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import mainPackage.datos;
+import seguridad.Encriptacion;
 
 public class RpcDatosRecibidos implements AutoCloseable {
 
@@ -32,11 +41,25 @@ public class RpcDatosRecibidos implements AutoCloseable {
                 String solicitud = "Datos moodle";
                 System.out.println(" [x] Solicitando datos...");
                 response = datosR.call(solicitud);
+                System.out.println(response);
+                
+                Encriptacion seguridad = new Encriptacion();
+                response = seguridad.desencriptar(response, "Dia");
                 
                 datos.getInstance().setJson(response);
             
         } catch (IOException | TimeoutException | InterruptedException e) {
             e.printStackTrace();
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(RpcDatosRecibidos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvalidKeyException ex) {
+            Logger.getLogger(RpcDatosRecibidos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchPaddingException ex) {
+            Logger.getLogger(RpcDatosRecibidos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalBlockSizeException ex) {
+            Logger.getLogger(RpcDatosRecibidos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (BadPaddingException ex) {
+            Logger.getLogger(RpcDatosRecibidos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

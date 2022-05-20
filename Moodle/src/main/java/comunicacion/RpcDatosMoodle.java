@@ -3,9 +3,16 @@ package comunicacion;
 import com.rabbitmq.client.*;
 import dominio.Materia;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.TimeoutException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import seguridad.Encriptacion;
 
 public class RpcDatosMoodle {
 
@@ -39,7 +46,22 @@ public class RpcDatosMoodle {
                     System.out.println(" [.] Solicitud: " + message);
                     System.out.println(" [.] Enviando datos...");
                     response = datos.getJson();
+                    Encriptacion seguridad = new Encriptacion();
+                    response = seguridad.encriptar(response, "Dia");
+                    
                 } catch (RuntimeException e) {
+                } catch (UnsupportedEncodingException ex) {
+                    Logger.getLogger(RpcDatosMoodle.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (NoSuchAlgorithmException ex) {
+                    Logger.getLogger(RpcDatosMoodle.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InvalidKeyException ex) {
+                    Logger.getLogger(RpcDatosMoodle.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (NoSuchPaddingException ex) {
+                    Logger.getLogger(RpcDatosMoodle.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalBlockSizeException ex) {
+                    Logger.getLogger(RpcDatosMoodle.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (BadPaddingException ex) {
+                    Logger.getLogger(RpcDatosMoodle.class.getName()).log(Level.SEVERE, null, ex);
                 } finally {
                     channel.basicPublish("", delivery.getProperties().getReplyTo(), replyProps, response.getBytes("UTF-8"));
                     channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
