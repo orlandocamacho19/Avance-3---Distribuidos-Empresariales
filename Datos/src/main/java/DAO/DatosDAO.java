@@ -5,7 +5,7 @@
 package DAO;
 
 import com.mongodb.*;
-import mainPackage.datos;
+import mainPackage.datosR;
 import mainPackage.iDatos;
 
 /**
@@ -16,7 +16,7 @@ public class DatosDAO implements iDatos{
     
     @Override
     public String enviaDatos() {
-        return datos.getInstance().getJson();
+        return datosR.getInstance().getJson();
     }   
     
     public void insertarDatos() {

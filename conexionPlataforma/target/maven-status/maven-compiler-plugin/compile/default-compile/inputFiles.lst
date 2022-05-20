@@ -1,6 +1,8 @@
-/Users/orlandocamacho/Desktop/conexionPlataforma/src/main/java/dominio/Alumno.java
-/Users/orlandocamacho/Desktop/conexionPlataforma/src/main/java/mainPackage/main.java
-/Users/orlandocamacho/Desktop/conexionPlataforma/src/main/java/dominio/Materia.java
-/Users/orlandocamacho/Desktop/conexionPlataforma/src/main/java/dominio/Asignacion.java
-/Users/orlandocamacho/Desktop/conexionPlataforma/src/main/java/comunicacion/RpcDatosRecibidos.java
-/Users/orlandocamacho/Desktop/conexionPlataforma/src/main/java/dominio/Maestro.java
+/Users/orlandocamacho/Desktop/Avance-3---Distribuidos-Empresariales-main/Avance-3---Distribuidos-Empresariales-main/ConexionPlataforma/src/main/java/dominio/Asignacion.java
+/Users/orlandocamacho/Desktop/Avance-3---Distribuidos-Empresariales-main/Avance-3---Distribuidos-Empresariales-main/ConexionPlataforma/src/main/java/dominio/Alumno.java
+/Users/orlandocamacho/Desktop/Avance-3---Distribuidos-Empresariales-main/Avance-3---Distribuidos-Empresariales-main/ConexionPlataforma/src/main/java/dominio/Materia.java
+/Users/orlandocamacho/Desktop/Avance-3---Distribuidos-Empresariales-main/Avance-3---Distribuidos-Empresariales-main/ConexionPlataforma/src/main/java/mainPackage/datos.java
+/Users/orlandocamacho/Desktop/Avance-3---Distribuidos-Empresariales-main/Avance-3---Distribuidos-Empresariales-main/ConexionPlataforma/src/main/java/comunicacion/RpcDatosRecibidos.java
+/Users/orlandocamacho/Desktop/Avance-3---Distribuidos-Empresariales-main/Avance-3---Distribuidos-Empresariales-main/ConexionPlataforma/src/main/java/mainPackage/datosEscuela.java
+/Users/orlandocamacho/Desktop/Avance-3---Distribuidos-Empresariales-main/Avance-3---Distribuidos-Empresariales-main/ConexionPlataforma/src/main/java/mainPackage/iDatos.java
+/Users/orlandocamacho/Desktop/Avance-3---Distribuidos-Empresariales-main/Avance-3---Distribuidos-Empresariales-main/ConexionPlataforma/src/main/java/dominio/Maestro.java

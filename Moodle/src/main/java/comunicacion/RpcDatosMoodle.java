@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 public class RpcDatosMoodle {
 
-    private static final String RPC_QUEUE_NAME = "rpc_queue";
+    private static final String RPC_QUEUE_NAME = "rpc_1";
 
     public void enviarDatos(Materia datos) throws Exception {
         ConnectionFactory factory = new ConnectionFactory();

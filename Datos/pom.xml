@@ -10,19 +10,34 @@
         <maven.compiler.source>16</maven.compiler.source>
         <maven.compiler.target>16</maven.compiler.target>
     </properties>
-    <name>datos</name>
+    <name>Datos</name>
     <dependencies>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>conexionPlataforma</artifactId>
-            <version>${project.version}</version>
-        </dependency>
         
 <dependency>
     <groupId>org.mongodb</groupId>
     <artifactId>mongo-java-driver</artifactId>
     <version>3.12.6</version>
 </dependency>
-
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>conexionPlataforma</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <dependency>
+                <groupId>com.rabbitmq</groupId>
+                <artifactId>amqp-client</artifactId>
+                <version>5.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>conexionRegistro</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>ComunicacionAppsDatos</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>

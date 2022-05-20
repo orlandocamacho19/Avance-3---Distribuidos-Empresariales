@@ -1,12 +1,9 @@
 package comunicacion;
 
-import com.google.gson.Gson;
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
-import dominio.Materia;
-
 import java.io.IOException;
 import java.util.UUID;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -18,7 +15,7 @@ public class RpcDatosRecibidos implements AutoCloseable {
 
     private Connection connection;
     private Channel channel;
-    private String requestQueueName = "rpc_queue";
+    private String requestQueueName = "rpc_1";
     public String response;
 
     public RpcDatosRecibidos() throws IOException, TimeoutException {

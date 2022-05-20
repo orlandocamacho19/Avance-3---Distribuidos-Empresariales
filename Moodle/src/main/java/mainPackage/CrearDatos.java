@@ -28,6 +28,7 @@ public class CrearDatos {
         Asignacion asig4 = new Asignacion("04", "Asignacion 2", "9", alumno2);
         
         materia1.setID("01");
+        materia1.setSemestre("6");
         materia1.setNombre("Sistemas Distribuidos");
         materia1.setMaestro(maestro);
         materia1.addAlumno(alumno1);

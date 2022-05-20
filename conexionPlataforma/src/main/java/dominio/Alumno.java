@@ -12,6 +12,7 @@ import java.util.Objects;
  * @author orlandocamacho
  */
 public class Alumno {
+
     private String nombre;
     private String ID;
     private String semestre;
@@ -48,8 +49,8 @@ public class Alumno {
     public void setSemestre(String semestre) {
         this.semestre = semestre;
     }
-    
-    public String getJson(){
+
+    public String getJson() {
         Gson gson = new Gson();
         return gson.toJson(this);
     }
